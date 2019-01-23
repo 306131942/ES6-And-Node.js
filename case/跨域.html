@@ -1,0 +1,33 @@
+<!--客户端-->
+<p>
+  <input id="btn3" type="button" name="name" value="AJAXGET2_Param" 
+  onclick="AJAXRequest('/Test/AnotherFunc', 'GET', { 'request': 'wys' }, 'jsonp')"/>
+</p>
+
+<script>
+var ServerUrl = 'http://localhost:33268';
+//TODO:  封装 公用方法
+    //AJAX 请求
+    function AJAXRequest(url, type, data, dataType) {
+        $.ajax({
+            url: ServerUrl+url, // http://localhost:33268/Test/AnotherFunc
+            type: type,// get
+            data: data,//{ 'request': 'wys' }
+            dataType: dataType,// jsonp
+            jsonpCallback: foo,
+            success: function (data) {
+                console.log(data.staus);
+            },
+            error: function (err) {
+                alert('错误信息：' + err);
+            }
+        });
+    }
+</script>
+
+<!--服务器-->
+ public string AnotherFunc(string request)
+        {
+            string str = "foo({\"staus\":\"world\"})";
+            return  str;
+        }
