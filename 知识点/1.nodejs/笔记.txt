@@ -1,0 +1,89 @@
+﻿1、简单的说 Node.js 就是运行在服务端的 JavaScript。
+	Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。
+	Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。
+
+2、我们可以使用以下命令来查看当前的 Node 版本：
+	$ node -v
+
+3、NPM 使用介绍
+	$ npm -v
+	如果你安装的是旧版本的 npm，可以很容易得通过 npm 命令来升级
+	npm install npm -g
+	cnpm install npm -g
+
+4、使用 npm 命令安装模块
+	$ npm install <Module Name>
+	npm install express      # 本地安装
+	npm install express -g   # 全局安装
+	全局安装和本地安装的区别
+	http://www.cnblogs.com/PeunZhang/p/5629329.html
+
+	可以使用npm root -g查看全局安装目录
+	你可以使用以下命令来查看所有全局安装的模块：
+	npm list -g
+
+	本地安装
+	1. 将安装包放在 ./node_modules 下（运行 npm 命令时所在的目录），如果没有 node_modules 目录，会在当前执行 npm 命令的目录下生成 node_modules 目录。
+	2. 可以通过 require() 来引入本地安装的包。
+	全局安装
+	1. 将安装包放在 /usr/local 下或者你 node 的安装目录。
+	2. 可以直接在命令行里使用。
+
+	卸载模块
+	我们可以使用以下命令来卸载 Node.js 模块。
+	$ npm uninstall express
+
+	卸载后，你可以到 /node_modules/ 目录下查看包是否还存在，或者使用以下命令查看：
+	$ npm ls
+
+	更新模块
+	我们可以使用以下命令更新模块：
+	$ npm update express
+	
+	搜索模块
+	使用以下来搜索模块：
+	$ npm search express
+
+5、Node.js REPL(交互式解释器)
+	Node.js REPL(Read Eval Print Loop:交互式解释器) 表示一个电脑的环境；
+	可以解析js代码
+
+6、Node.js回调函数
+	1）、Node.js异步编程的直接体现就是回调；
+	异步编程依托于回调来实现，但不能说使用了回调后程序就异步化了。
+	2）、回调函数在完成任务后就会被调用，Node 使用了大量的回调函数，Node 所有 API 都支持回调函数。
+	因此，阻塞是按顺序执行的，而非阻塞是不需要按顺序的，
+	所以如果需要处理回调函数的参数，我们就需要写在回调函数内。
+
+7、Node.js事件循环
+Node.js 是单进程 单线程应用程序，但是通过事件和回调支持并发，所以性能非常高。
+Node.js 的每一个 API 都是异步的，并作为一个独立线程运行，使用异步函数调用，并处理并发。
+Node.js 基本上所有的事件机制都是用设计模式中观察者模式实现。
+Node.js 单线程类似进入一个while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，
+	如果有事件发生就调用该回调函数.
+
+8、Node 应用程序是如何工作的？
+在 Node 应用程序中，执行异步操作的函数将 回调函数作为最后一个参数， 回调函数接收错误对象作为第一个参数。
+
+9、EventEmitter 类
+	1)、events 模块只提供了一个对象： events.EventEmitter。EventEmitter 的核心就是事件触发与事件监听器功能的封装。
+	2）、
+		//event.js 文件
+		var events = require('events'); 
+		var emitter = new events.EventEmitter(); 
+		emitter.on('someEvent', function(arg1, arg2) { 
+			console.log('listener1', arg1, arg2); 
+		}); 
+		emitter.on('someEvent', function(arg1, arg2) { 
+			console.log('listener2', arg1, arg2); 
+		}); 
+		emitter.emit('someEvent', 'arg1 参数', 'arg2 参数'); 
+		//emitter 为事件 someEvent 注册了两个事件监听器，然后触发了 someEvent 事件。
+		EventEmitter 的每个事件由一个事件名和若干个参数组成，事件名是一个字符串，通常表达一定的语义。对
+		于每个事件，EventEmitter 支持若干个事件监听器。
+		当事件触发时，注册到这个事件的事件监听器被依次调用，事件参数作为回调函数参数传递。
+
+	3）、	EventEmitter 提供了多个属性，如 on 和 emit。
+		on 函数用于绑定事件函数，emit 属性用于触发一个事件。接下来我们来具体
+
+SET NOCOUNT ON;
